@@ -1,0 +1,28 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+//const nums = [100, 4, 200, 1, 3, 2] // Result: 4 || Example 1 
+//const nums = [0,3,7,2,5,8,4,6,0,1] // Result: 9 || Example 2
+
+ var longestConsecutive = function(nums) {
+    if(nums.length <= 1) return nums.length;
+    // short circuit, if array.length <= 1 can only be 0 or 1, return array.length
+    const numSet = new Set(nums);
+    //console.log(numSet); // Uncomment to see that numSet is an object created from array
+    let longest = 0;
+    for(const [num] of numSet.entries()) {
+        if(!numSet.has(num - 1)) {
+            let temp = num;
+            let count = 0;
+            while(numSet.has(temp)) {
+                count++;
+                temp++;
+            }
+            if(count > longest) {
+                longest = count;
+            }
+        }   
+    }
+    return longest;
+}
